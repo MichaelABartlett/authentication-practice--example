@@ -1,6 +1,8 @@
 // this is an express app
 const express = require("express");
 
+let env = require("dotenv").config(); // it does not need to be a variable
+
 // to connect to the database
 const db = require("./database/connection");
 
@@ -12,6 +14,13 @@ const jwt = require("jsonwebtoken");
 // needs to be in a .env file
 // the JWT secret that is used when signing JWT
 const jwtSecret = "some super secret";
+
+
+let port = process.env.PORT;
+
+// needs to be in a .env file
+// the JWT secret that is used when signing JWT
+//const jwtSecret = "some super secret"; // this has been moved to .env
 
 // create the app
 const app = express();
@@ -181,6 +190,8 @@ app.post("/login", (req, res) => {
  */
 // create a user in the database, note that we check that the JWT token is valid,
 // and that the JWT token has admin role
+//  ***** to seed the first user just delete the middleware and create user, then add middleware back
+// ****** this uder will need to be deleted when the program is finally deployed 
 app.post("/createUser", [checkJwt, isAdmin], (req, res) => {
     // note that we do not include the password in the console log
     console.log("POST /createUser: ", req.body.username);
@@ -234,5 +245,7 @@ app.get("/users/:user_id", function(req, res) {
     });
 })
 
-const PORT = process.env.PORT || 9000
-app.listen()
+const PORT = process.env.PORT || 9001
+app.listen(port, () => {
+    console.log(`Web server is listening on port ${port}!`);
+})
