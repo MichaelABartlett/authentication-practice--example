@@ -19,6 +19,7 @@ connection.connect();
 //connection.query("select now()", function(error, rows){ // use this to check connection to database and get time stamp
 // to get a time stamp use 'SELECT now()' before the function 
 connection.query("use " + process.env.MYSQL_DATABASE, function(error, rows){
+    console.log("inside connedtion test");
     if(error){
         console.log("DB Query error", error);
     } else {

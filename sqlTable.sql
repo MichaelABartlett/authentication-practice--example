@@ -8,7 +8,11 @@ create table users (
     PRIMARY KEY(id)
     );
     
-    INSERT INTO ingredients (ingredient, preptime, instruction) 
-	values ('chicken', '24 hours', 'put frozen chicken in icebox and keep in sealed package');
+    INSERT INTO users (username, password_hash, role) 
+	values ('codeman', '$2b$10$H1EX3rxRpsuhapDj2a5Vh.ncu7of1boNlNt.9rlJ7Afgr6qwNLYH6', 'admin');
     
 select * from users;
+
+update users set role = 'admin' where id = 1;
+
+
